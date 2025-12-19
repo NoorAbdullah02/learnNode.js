@@ -15,7 +15,8 @@
         <div class="nav mb-10">
             <a class="text-blue-500" href="/">Back to h</a>
         </div>
-        <h1>All Users</h1>
+    
+            <h1>All Users</h1>
         <div class="users flex gap-5 mt-5 flex-wrap">
             <div class="user-max-w-72 p-4 bg-zinc-800 rounded-lg">
                 <% allusers.forEach(function(user){%>
@@ -30,11 +31,11 @@
                         <%= user.email%>
                     </h5>
                     <div class="flex gap-3">
-                        <a class="text-zinic-500" href="">Edit User</a>
-                        <a class="text-red-200" href="">Delete User</a>
+                        <a class="text-zinic-500" href="/edit/<%= user._id %>">Edit User</a>
+                        <a class="text-red-200" href="/delete/<%= user._id %>">Delete User</a>
                     </div>
             </div>
-            <%}) %>
+            <% }) %>
 
         </div>
     </div>

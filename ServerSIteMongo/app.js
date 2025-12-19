@@ -5,6 +5,7 @@ const app = express();
 const path = require('path');
 
 const usermodel = require('./models/user');
+const user = require('./models/user');
 
 app.set("views", path.join(__dirname, "views"));
 
@@ -22,8 +23,28 @@ app.get('/', (req, res) => {
 
 
 app.get('/read', async (req, res) => {
-  let allusers =  await usermodel.find();
-    res.render("read",{allusers: allusers});
+    let allusers = await usermodel.find();
+    res.render("read", { allusers: allusers });
+})
+
+app.get('/edit/:userid', async (req, res) => {
+    let user = await usermodel.findOne({ _id: req.params.userid });
+    res.render("edit", { user });
+})
+
+
+app.post('/update/:userid', async (req, res) => {
+
+    let { name, email, photo } = req.body;
+
+    await usermodel.findOneAndUpdate({ _id: req.params.userid }, { photo, name, email });
+    res.redirect("/read");
+})
+
+
+app.get('/delete/:id', async (req, res) => {
+    let allusers = await usermodel.findOneAndDelete({ _id: req.params.id });
+    res.redirect("/read");
 })
 
 app.post('/create', async (req, res) => {
