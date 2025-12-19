@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Form </title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body>
+    <h1>Edit your Form here!!</h1>
+    <form action="/edit" method="post">
+        <input class="bg-black-700 mt-2" type="text" placeholder="Enter Previous Name" name="previous"
+            value="<%= filename%>">
+        <input class="bg-black-700 mt-2" type="text" placeholder="Enter New Name" name="newName">
+        <input class="bg-white-700 mt-2 flex bg-black-800" type="submit" placeholder="Enter Previous Name"
+            name="previous" value="Update Name">
+    </form>
+
+</body>
+
+</html>
