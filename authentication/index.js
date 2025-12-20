@@ -56,6 +56,13 @@ app.post('/login', async(req,res)=>{
    if(!user)return res.status(404).send("Something went Wrong");
 
    bcrypt.compare(req.body.password, user.password, (err, result)=>{
+    
+    if(result){
+        const { email } = req.body;
+        let token = jwt.sign({ email }, "shoooo");
+        res.cookie("token", token);
+        return res.send("Login Successful");
+    }
     if(err)return res.status(500).send("Internal Server Error");
     if(!result)return res.status(401).send("Password is incorrect");
     res.send("You Can Login");
