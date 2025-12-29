@@ -6,12 +6,6 @@ const ownerModel = require("../models/owner_model");
 
 
 
-
-
-
-
-
-
 if (process.env.NODE_ENV === 'development') {
     router.post("/create", async (req, res) => {
         let owners = await ownerModel.find();
@@ -31,8 +25,13 @@ if (process.env.NODE_ENV === 'development') {
 
 
 router.get("/admin", (req, res) => {
-    res.send("hey working");
+    let success = req.flash('success');
+    res.render("createproducts", { success });
 })
+
+
+
+
 console.log(process.env.NODE_ENV);
 
 
