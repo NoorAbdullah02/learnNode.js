@@ -8,10 +8,21 @@ const userSchema = pgTable('users', {
     lastName: varchar('last_name', { length: 15 }),
     email: varchar({ length: 30 }).notNull().unique(),
     password: text().notNull(),
-    salt: text(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
-export { userSchema }
+
+
+const userUrl = pgTable('user_urls', {
+    id: uuid().primaryKey().default(sql`gen_random_uuid()`),
+    url: text().notNull(),
+    shorturl: text().unique(),
+    code: text(),
+    userId: uuid('user_id').notNull().references(() => userSchema.id),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
+export { userSchema, userUrl }
 
